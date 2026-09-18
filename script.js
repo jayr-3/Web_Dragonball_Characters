@@ -29,7 +29,7 @@ async function fetchBaseCharacters() {
         statusMessage.style.display = 'block';
         statusMessage.innerText = 'SCANNING DRAGON BALL DATABASE...';
         
-        const response = await fetch('https://dragonball-api.com/api/characters?limit=100');
+        const response = await fetch('/api/characters?limit=100');
         const data = await response.json();
 
         allCharacters = data.items || data;
@@ -104,7 +104,7 @@ async function prefetchTransformations(characters) {
 async function loadTransformations(charId) {
     if (charCache.has(charId)) { attachTransformationsToCard(charId, charCache.get(charId)); return; }
     try {
-        const response = await fetch(`https://dragonball-api.com/api/characters/${charId}`);
+        const response = await fetch(`/api/characters/${charId}`);
         const detail = await response.json();
         charCache.set(charId, detail);
         attachTransformationsToCard(charId, detail);
