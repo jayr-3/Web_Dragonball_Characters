@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon Ball API & Scouter Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Poppins:wght@400;600;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <img src="logo.gif" alt="DB Logo" class="db-logo-gif">
+            <span>DRAGON BALL</span>
+        </div>
+        <nav>
+            <a href="#" class="active">Home</a>
+            <a href="#characters">Characters</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-title-img">
+            <h1>DRAGON BALL <span>CHARACTERS</span></h1>
+            <p class="subtitle">Ultimate Scouter System & Transformations</p>
+        </div>
+
+        <div class="search-container">
+            <div class="search-input-wrapper">
+                <input type="text" id="searchInput" placeholder="Search character (Goku, Vegeta)">
+                <button id="searchBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    SCAN
+                </button>
+            </div>
+
+            <div class="sort-wrapper">
+                <label for="sortKiSelect">SORT BY POWER:</label>
+                <select id="sortKiSelect">
+                    <option value="default">Default</option>
+                    <option value="desc">Ki: High → Low (พลังสูงสุดไปต่ำสุด)</option>
+                    <option value="asc">Ki: Low → High (พลังต่ำสุดไปสูงสุด)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Race Filter Tabs -->
+        <div class="filter-tabs" id="filterTabs">
+            <button class="tab-btn active" data-filter="all">ALL RACES</button>
+            <button class="tab-btn" data-filter="Saiyan">SAIYANS</button>
+            <button class="tab-btn" data-filter="Z Fighter">Z Fighter</button>
+            <button class="tab-btn" data-filter="Human">HUMANS</button>
+            <button class="tab-btn" data-filter="ANDROID">ANDROID</button>
+            <button class="tab-btn" data-filter="Namekian">NAMEKIANS</button>
+            <button class="tab-btn" data-filter="Frieza Race">FRIEZA RACE</button>
+            <button class="tab-btn" data-filter="GOD">GOD</button>
+            <button class="tab-btn" data-filter="ANGEL">ANGEL</button>
+            <button class="tab-btn" data-filter="Nucleico">Nucleico</button>
+        </div>
+    </section>
+
+    <main class="container" id="characters">
+        <div class="status-message" id="statusMessage">LOADING TARGET DATA...</div>
+        <div class="grid" id="characterGrid"></div>
+    </main>
+
+    <div id="characterModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-layout">
+                <div class="modal-left">
+                    <img id="modalImg" src="" alt="Character Image">
+                </div>
+                <div class="modal-right">
+                    <h2 id="modalName" class="char-name">NAME</h2>
+                    <h4 id="modalSubtitle" class="char-subtitle">RACE | AFFILIATION</h4>
+                    <div class="stat-group">
+                        <span class="stat-label">CURRENT POWER LEVEL</span>
+                        <span class="stat-value scouter-number" id="modalKi">0</span>
+                    </div>
+                    <div class="modal-desc-box">
+                        <p id="modalDesc">History loading...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Powered by <a href="https://dragonball-api.com/" target="_blank">dragonball-api.com</a> | Designed with Scouter HUD System</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
