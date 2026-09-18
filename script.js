@@ -29,7 +29,7 @@ async function fetchBaseCharacters() {
         statusMessage.style.display = 'block';
         statusMessage.innerText = 'SCANNING DRAGON BALL DATABASE...';
         
-        const response = await fetch('/api/characters?limit=100');
+        const response = await fetch('https://dragonball-api.com/api/characters?limit=100');
         const data = await response.json();
 
         allCharacters = data.items || data;
@@ -104,7 +104,7 @@ async function prefetchTransformations(characters) {
 async function loadTransformations(charId) {
     if (charCache.has(charId)) { attachTransformationsToCard(charId, charCache.get(charId)); return; }
     try {
-        const response = await fetch(`/api/characters/${charId}`);
+        const response = await fetch(`https://dragonball-api.com/api/characters/${charId}`);
         const detail = await response.json();
         charCache.set(charId, detail);
         attachTransformationsToCard(charId, detail);
@@ -124,12 +124,11 @@ function attachTransformationsToCard(charId, detail) {
         thumb.className = 'form-thumb';
         thumb.title = form.name;
         thumb.dataset.img = form.image; thumb.dataset.name = form.name; thumb.dataset.ki = form.ki;
-        thumb.onclick = function(e) { e.stopPropagation(); switchForm(this, charId); }; // กันคลิกแล้ว Modal เด้ง
+        thumb.onclick = function(e) { e.stopPropagation(); switchForm(this, charId); }; 
         formsBox.appendChild(thumb);
     });
 }
 
-// อัปเดตเพิ่ม onclick='openModal()' ไปที่ตัวการ์ด
 function renderCharacters(characters) {
     characterGrid.innerHTML = '';
     if (characters.length === 0) {
@@ -143,7 +142,7 @@ function renderCharacters(characters) {
         const card = document.createElement('div');
         card.className = 'card';
         card.id = `card-${char.id}`;
-        card.setAttribute('onclick', `openModal(${char.id})`); // เปิด Modal เมื่อคลิกการ์ด
+        card.setAttribute('onclick', `openModal(${char.id})`); 
 
         card.innerHTML = `
             <div class="card-top">
@@ -222,21 +221,17 @@ window.switchForm = function(el, charId) {
     }
 };
 
-// ระบบ Modal แสดงประวัติ
 window.openModal = async function(charId) {
-    // ดึงข้อมูลรูป/ชื่อ ปัจจุบันที่โชว์อยู่บนการ์ด (เผื่อว่ากดสลับร่างอยู่)
     const currentImg = document.getElementById(`img-${charId}`).src;
     const currentName = document.getElementById(`name-${charId}`).innerText;
     const currentKi = document.getElementById(`ki-${charId}`).getAttribute('data-value');
     
-    // ดึงข้อมูลประวัติจาก Cache ที่โหลดไว้
     let detail = charCache.get(charId);
     
     modalImg.src = currentImg;
     modalName.innerText = currentName;
     modalSubtitle.innerText = detail ? `${detail.race || 'Unknown'} | ${detail.affiliation || 'Freelancer'}` : 'Unknown';
     
-    // เซ็ตเอฟเฟกต์ตัวเลข Scouter ภายในหน้าต่าง
     modalKi.setAttribute('data-value', currentKi);
     triggerScouterEffect(modalKi);
 
@@ -245,6 +240,5 @@ window.openModal = async function(charId) {
     modal.classList.add('show');
 };
 
-// ปิด Modal
 closeModal.onclick = () => modal.classList.remove('show');
 window.onclick = (e) => { if (e.target == modal) modal.classList.remove('show'); }

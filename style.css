@@ -44,9 +44,8 @@ body {
     letter-spacing: 2px;
 }
 
-/* GIF Logo Style */
 .db-logo-gif {
-    height: 80px;
+    height: 70px;
     width: auto;
     object-fit: contain;
     border-radius: 6px;
@@ -113,6 +112,7 @@ body {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0, 0, 0, 0.9);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex; flex-direction: column; position: relative;
+    cursor: pointer;
 }
 .card::before {
     content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
@@ -141,10 +141,40 @@ body {
     bottom: 5px; z-index: 2; filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.8)); transition: all 0.5s ease;
 }
 .card:hover .card-img { transform: scale(1.1) translateY(-5px); filter: drop-shadow(0 0 25px var(--primary-gold)); }
-/* ... โค้ดเดิมทั้งหมดของคุณ ... */
 
-/* เพิ่ม: ให้การ์ดสามารถกดคลิกได้ */
-.card { cursor: pointer; }
+/* Transformations Selector */
+.form-selector-container {
+    background: linear-gradient(to right, #0a0a0c, #1a1a1c, #0a0a0c);
+    padding: 12px 5px; border-top: 1px solid rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.05); display: none; position: relative; z-index: 3;
+}
+.form-selector { 
+    display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; 
+    padding-left: 10px; padding-right: 10px;
+    justify-content: flex-start;
+    align-items: center;
+}
+.form-selector::-webkit-scrollbar { height: 6px; }
+.form-selector::-webkit-scrollbar-thumb { background: var(--primary-gold); border-radius: 10px; }
+.form-selector::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); border-radius: 10px; }
+
+.form-thumb {
+    width: 50px; height: 50px; border-radius: 8px; 
+    object-fit: contain; object-position: center; padding: 3px;
+    border: 2px solid #333; cursor: pointer; transition: 0.3s; flex-shrink: 0; background: #121418; transform: skewX(-10deg);
+}
+.form-thumb:hover, .form-thumb.active { border-color: var(--primary-gold); box-shadow: 0 0 15px var(--primary-gold); transform: skewX(-10deg) scale(1.15); filter: brightness(1.2); }
+
+/* Card Bottom (Stats) */
+.card-bottom { padding: 25px 20px; display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 3; background: var(--card-bg); }
+.char-name { font-family: 'Oswald', sans-serif; font-size: 1.8rem; font-weight: 900; line-height: 1.1; color: var(--text-white); text-transform: uppercase; letter-spacing: 1px; text-shadow: 2px 2px 0 #000;}
+.char-subtitle { color: var(--primary-gold); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;}
+
+.stat-group { display: flex; flex-direction: column; gap: 2px; margin-top: 5px; padding-top: 10px; border-top: 1px dashed rgba(255,255,255,0.1); }
+.stat-label { color: var(--lightning-blue); font-size: 0.8rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
+.scouter-number { font-family: 'Share Tech Mono', monospace; font-size: 1.6rem; font-weight: bold; color: var(--text-white); text-shadow: 0 0 10px rgba(255, 255, 255, 0.4); }
+
+.status-message { text-align: center; font-size: 1.5rem; color: var(--primary-gold); padding: 50px; font-family: 'Share Tech Mono', monospace; text-shadow: 0 0 15px var(--primary-gold); }
+footer { text-align: center; padding: 30px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); font-size: 0.9rem; }
 
 /* Modal Background */
 .modal {
@@ -201,36 +231,3 @@ body {
     .modal-right { text-align: center; }
     .modal-desc-box { text-align: left; }
 }
-/* Transformations Selector */
-.form-selector-container {
-    background: linear-gradient(to right, #0a0a0c, #1a1a1c, #0a0a0c);
-    padding: 12px 5px; border-top: 1px solid rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.05); display: none; position: relative; z-index: 3;
-}
-.form-selector { 
-    display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; 
-    padding-left: 10px; padding-right: 10px;
-    justify-content: flex-start;
-    align-items: center;
-}
-.form-selector::-webkit-scrollbar { height: 6px; }
-.form-selector::-webkit-scrollbar-thumb { background: var(--primary-gold); border-radius: 10px; }
-.form-selector::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); border-radius: 10px; }
-
-.form-thumb {
-    width: 50px; height: 50px; border-radius: 8px; 
-    object-fit: contain; object-position: center; padding: 3px;
-    border: 2px solid #333; cursor: pointer; transition: 0.3s; flex-shrink: 0; background: #121418; transform: skewX(-10deg);
-}
-.form-thumb:hover, .form-thumb.active { border-color: var(--primary-gold); box-shadow: 0 0 15px var(--primary-gold); transform: skewX(-10deg) scale(1.15); filter: brightness(1.2); }
-
-/* Card Bottom (Stats) */
-.card-bottom { padding: 25px 20px; display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 3; background: var(--card-bg); }
-.char-name { font-family: 'Oswald', sans-serif; font-size: 1.8rem; font-weight: 900; line-height: 1.1; color: var(--text-white); text-transform: uppercase; letter-spacing: 1px; text-shadow: 2px 2px 0 #000;}
-.char-subtitle { color: var(--primary-gold); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;}
-
-.stat-group { display: flex; flex-direction: column; gap: 2px; margin-top: 5px; padding-top: 10px; border-top: 1px dashed rgba(255,255,255,0.1); }
-.stat-label { color: var(--lightning-blue); font-size: 0.8rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
-.scouter-number { font-family: 'Share Tech Mono', monospace; font-size: 1.6rem; font-weight: bold; color: var(--text-white); text-shadow: 0 0 10px rgba(255, 255, 255, 0.4); }
-
-.status-message { text-align: center; font-size: 1.5rem; color: var(--primary-gold); padding: 50px; font-family: 'Share Tech Mono', monospace; text-shadow: 0 0 15px var(--primary-gold); }
-footer { text-align: center; padding: 30px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); font-size: 0.9rem; }
